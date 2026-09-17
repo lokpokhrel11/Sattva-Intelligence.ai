@@ -1002,3 +1002,12 @@ tbody tr:hover td{
 .page-head-method + .container + .section {
   padding-top: 24px;
 }
+.method-reading {
+  max-width: none;
+}
+
+.method-reading .prose {
+  max-width: 980px;
+  margin-left: 0;
+  margin-right: auto;
+}
