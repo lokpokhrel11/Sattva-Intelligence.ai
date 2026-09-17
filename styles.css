@@ -331,9 +331,16 @@ main{
 
 .bio-strip{
   display:grid;
-  grid-template-columns:1fr 2fr;
+  grid-template-columns:280px 1fr;
   gap:48px;
   align-items:start;
+}
+
+.bio-strip img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid var(--line);
 }
 
 .bio-strip h2{
