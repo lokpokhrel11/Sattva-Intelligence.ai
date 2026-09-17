@@ -994,8 +994,11 @@ tbody tr:hover td{
 
 .method-image-credit {
   max-width: 980px;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   font-size: 0.82rem;
   line-height: 1.55;
   opacity: 0.58;
+}
+.page-head-method + .container + .section {
+  padding-top: 24px;
 }
