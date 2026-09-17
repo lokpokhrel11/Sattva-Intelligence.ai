@@ -333,11 +333,7 @@ main{
   display:grid;
   grid-template-columns:280px 1fr;
   gap:48px;
-  align-items:stretch;
-}
-
-.bio-strip > div:first-child{
-  display:flex;
+  align-items:start;
 }
 
 .bio-strip img{
