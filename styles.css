@@ -1,25 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap');
 
-:root{
-  --bg:#11110f;
-  --surface:#191916;
-  --surface-2:#20201c;
+:root[data-theme="light"]{
+  --bg:#f6f2e9;
+  --surface:#ece5d3;
+  --surface-2:#e3dac2;
+  --text:#2a2620;
+  --muted:#6b6455;
+  --accent:#8a6a1f;
+  --accent-soft:#c9b483;
+  --line:#ddd2b0;
+  color-scheme:light;
+}
 
-  --text:#ebe8df;
-  --muted:#aaa79d;
+[data-theme="light"] .prose p,
+[data-theme="light"] .prose li,
+[data-theme="light"] .bio-strip p,
+[data-theme="light"] .note,
+[data-theme="light"] .citation{
+  color:#3a352c;
+}
 
-  --accent:#c3a45d;
-  --accent-soft:#7c693e;
+.theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:38px;
+  height:38px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  font-size:15px;
+}
 
-  --line:#37362f;
-
-  --max:1120px;
-  --reading:760px;
-
-  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
-  --sans:'Source Sans 3',Arial,Helvetica,sans-serif;
-
-  color-scheme:dark;
+.theme-toggle:hover{
+  border-color:var(--accent-soft);
 }
 
 *{
