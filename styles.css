@@ -340,8 +340,6 @@ main{
   display:block;
   width:100%;
   height:auto;
-  max-height:460px;
-  object-fit:cover;
   border:1px solid var(--line);
 }
 .bio-strip h2{
