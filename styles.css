@@ -1021,13 +1021,7 @@ tbody tr:hover td{
   isolation: isolate;
 }
 
-.page-head-suka::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.28);
-  z-index: -1;
-}
+
 
 /* Keep heading and introductory text clearly visible */
 .page-head-suka h1,
@@ -1039,13 +1033,13 @@ tbody tr:hover td{
 /* Navigation buttons over the image */
 .page-head-suka .button {
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.75);
-  background: rgba(0, 0, 0, 0.38);
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .page-head-suka .button:hover,
 .page-head-suka .button:focus {
   color: #ffffff;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(0, 0, 0, 0.75);
   border-color: #ffffff;
 }
