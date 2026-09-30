@@ -10,8 +10,20 @@
 <meta name="description"
 content="About Lok Pokhrel and the Sattva Intelligence project.">
 
+<!-- Progressive Web App -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#7a5a20">
+
+<!-- iPhone / iPad web app settings -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Sattva Intelligence">
+<link rel="apple-touch-icon" sizes="180x180" href="images/app-icon-180.png">
+
+<!-- Site files -->
 <link rel="stylesheet" href="styles.css">
 <script src="site.js" defer></script>
+
 </head>
 
 
@@ -21,6 +33,7 @@ content="About Lok Pokhrel and the Sattva Intelligence project.">
 
 
 <header class="site-header">
+
 <div class="nav-wrap">
 
 <a class="brand" href="index.html">
@@ -28,7 +41,8 @@ content="About Lok Pokhrel and the Sattva Intelligence project.">
 <span>Sattva Intelligence</span>
 </a>
 
-<button class="menu-button"
+<button
+class="menu-button"
 type="button"
 aria-expanded="false"
 aria-controls="site-nav">
@@ -36,6 +50,7 @@ Menu
 </button>
 
 <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+
 <a href="index.html">Home</a>
 <a href="episodes.html">Bhagavata Purana</a>
 <a href="indic-minds.html">Indic Minds</a>
@@ -43,33 +58,47 @@ Menu
 <a href="corrections.html">Corrections</a>
 <a href="indic-wisdom.html">Indic Wisdom</a>
 <a href="about.html" aria-current="page">About</a>
+
 </nav>
 
 </div>
+
 </header>
 
 
 <main id="main">
 
+
 <header class="page-head">
+
 <div class="container">
 
 <p class="eyebrow">About</p>
+
 <h1>Lok Pokhrel</h1>
 
 </div>
+
 </header>
 
 
 <section class="section">
+
 <div class="container">
 
+
+<!-- AUTHOR BIO -->
 
 <div class="bio-strip">
 
 <div>
-<img src="images/images/Lok Pokhrel.jpeg" alt="Lok Pokhrel">
+
+<img
+src="images/images/Lok Pokhrel.jpeg"
+alt="Lok Pokhrel">
+
 </div>
+
 
 <div class="prose">
 
@@ -92,10 +121,12 @@ use of translations, commentarial sources, and textual context.
 </p>
 
 </div>
+
 </div>
 
 
 <div class="prose" style="margin-top:40px">
+
 
 <p>
 In preparing the Bhagavata Purana project, he works comparatively
@@ -130,6 +161,8 @@ and Western Washington University, and previously served as Subject
 Lead in Communications at University Canada West.
 </p>
 
+
+<!-- ABOUT THE PROJECT -->
 
 <h2>About the Project</h2>
 
@@ -173,6 +206,8 @@ provide different points of entry into that inquiry.
 </p>
 
 
+<!-- RESEARCH RESOURCES -->
+
 <h2>Research Resources</h2>
 
 <p>
@@ -187,16 +222,21 @@ pages. Substantive corrections are maintained in the
 <a href="corrections.html">Corrections Log</a>.
 </p>
 
-<h2>Add Sattva Intelligence to Your Phone</h2>
+
+<!-- ADD TO PHONE -->
+
+<h2 id="add-to-phone">Add Sattva Intelligence to Your Phone</h2>
 
 <p>
-Sattva Intelligence can be added to a phone's Home Screen for
+Sattva Intelligence can be added to your phone's Home Screen for
 quick access to the Bhagavata Purana series, research indexes,
 Sanskrit resources, Indic Minds, and Indic Wisdom. No App Store
 download is required.
 </p>
 
-<div class="card-grid">
+
+<div class="card-grid" style="margin-top:24px;">
+
 
 <div class="card">
 
@@ -205,13 +245,14 @@ download is required.
 <h2>iPhone or iPad</h2>
 
 <p>
-Open the site in <strong>Safari</strong>, tap the
-<strong>Share</strong> button, select
-<strong>Add to Home Screen</strong>, and tap
+Open Sattva Intelligence in <strong>Safari</strong>. Tap the
+<strong>Share</strong> button, scroll down and select
+<strong>Add to Home Screen</strong>, then tap
 <strong>Add</strong>.
 </p>
 
 </div>
+
 
 <div class="card">
 
@@ -220,21 +261,28 @@ Open the site in <strong>Safari</strong>, tap the
 <h2>Android</h2>
 
 <p>
-Open the site in <strong>Chrome</strong>, open the browser menu,
-choose <strong>Install app</strong> or
-<strong>Add to Home screen</strong>, and confirm.
+Open Sattva Intelligence in <strong>Chrome</strong>. Open the
+browser menu and choose <strong>Install app</strong> or
+<strong>Add to Home screen</strong>, then confirm.
 </p>
 
 </div>
 
+
 </div>
-<div class="contact-box">
+
+
+<!-- CONTACT -->
+
+<div class="contact-box" style="margin-top:40px;">
 
 <h2>Contact</h2>
 
 <p>
 For inquiries, corrections, or collaboration:
-<a href="mailto:lokpokhrel11@yahoo.com">lokpokhrel11@yahoo.com</a>
+<a href="mailto:lokpokhrel11@yahoo.com">
+lokpokhrel11@yahoo.com
+</a>
 </p>
 
 </div>
@@ -243,22 +291,55 @@ For inquiries, corrections, or collaboration:
 </div>
 
 </div>
+
 </section>
+
 
 </main>
 
 
 <footer class="site-footer">
+
 <div class="container footer-wrap">
 
-<p>&copy; 2026 Sattva Intelligence</p>
+<p>
+&copy; 2026 Lok Pokhrel / Sattva Intelligence
+</p>
 
 <p>
-<a href="method.html">Method and sources</a>
+<a href="method.html">Method and sources</a> ·
+<a href="copyright.html">Copyright and Use</a>
 </p>
 
 </div>
+
 </footer>
+
+
+<!-- Register service worker -->
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+  window.addEventListener("load", function () {
+
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .catch(function (error) {
+
+        console.log(
+          "Service worker registration failed:",
+          error
+        );
+
+      });
+
+  });
+
+}
+
+</script>
 
 
 </body>
