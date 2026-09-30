@@ -1011,3 +1011,41 @@ tbody tr:hover td{
   margin-left: 0;
   margin-right: auto;
 }
+/* =========================================================
+   BHAGAVATA PURANA INDEX HERO
+   Darker overlay for readability
+   ========================================================= */
+
+.page-head-suka {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-head-suka::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  z-index: -1;
+}
+
+/* Keep heading and introductory text clearly visible */
+.page-head-suka h1,
+.page-head-suka p,
+.page-head-suka .eyebrow {
+  color: #ffffff;
+}
+
+/* Navigation buttons over the image */
+.page-head-suka .button {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.75);
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.page-head-suka .button:hover,
+.page-head-suka .button:focus {
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.72);
+  border-color: #ffffff;
+}
