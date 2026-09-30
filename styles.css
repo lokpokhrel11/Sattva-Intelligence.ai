@@ -1025,7 +1025,7 @@ tbody tr:hover td{
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.62);
+  background: rgba(0, 0, 0, 0.28);
   z-index: -1;
 }
 
