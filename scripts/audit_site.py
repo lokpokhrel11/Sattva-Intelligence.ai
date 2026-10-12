@@ -70,6 +70,8 @@ def audit():
         if not (ROOT / path).is_file():
             errors.append(f"sitemap: missing target {path}")
     for name in parsed:
+        if re.fullmatch(r"google[a-fA-F0-9]+\\.html", name):
+            continue  # Google Search Console ownership verification, not content
         if name not in listed:
             errors.append(f"sitemap: HTML page omitted: {name}")
     print(f"Audited {len(parsed)} HTML pages, {checked} local links/assets, {len(listed)} sitemap entries.")
