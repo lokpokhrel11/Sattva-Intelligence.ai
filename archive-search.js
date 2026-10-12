@@ -1,4 +1,4 @@
-/* Client-side search across published site pages. Update the episode range as the series grows. */
+/* Client-side search: episode discovery follows sitemap.xml. Keep the sitemap updated when publishing episodes. */
 (function(){
 "use strict";
 const fixedResources=[
@@ -40,7 +40,7 @@ async function load(){
     const response=await fetch(url,{cache:"default"});
     if(!response.ok)throw Error("HTTP "+response.status);
     const html=new DOMParser().parseFromString(await response.text(),"text/html");
-    const title=(html.querySelector("title")?.textContent||label).replace(/\s*[—|]\\s*Sattva Intelligence.*$/,"").trim();
+    const title=(html.querySelector("title")?.textContent||label).replace(/\s*[—|]\s*Sattva Intelligence.*$/,"").trim();
     for(const el of html.querySelectorAll("script,style,nav,footer,header.site-header"))el.remove();
     const main=html.querySelector("main")||html.body;
     const raw=(main.textContent||"").replace(/\s+/g," ").trim();
