@@ -23,17 +23,21 @@ if(!response.ok)throw Error("HTTP "+response.status);
 const html=new DOMParser().parseFromString(await response.text(),"text/html");
 for(const el of html.querySelectorAll("script,style,nav,footer,header.site-header"))el.remove();
 const main=html.querySelector("main")||html.body;
-const raw=(main.innerText||main.textContent||"").replace(/\s+/g," ").trim();
-return {url,label,text:raw,norm:normalize(raw)};
+const raw=(main.textContent||"").replace(/\s+/g," ").trim();
+const title=(html.querySelector("title")?.textContent||label).replace(/\s*[—|]\s*Sattva Intelligence.*$/,"").trim();
+return {url,label,title,text:raw,norm:normalize(raw),titleNorm:normalize(title)};
 }catch(e){return null;}
 }));
 cached=docs.filter(Boolean);return cached;
 }
 function snippet(text,q){
-const norm=normalize(text),i=norm.indexOf(q);
-if(i<0)return text.slice(0,175)+(text.length>175?"…":"");
-const start=Math.max(0,i-75),end=Math.min(text.length,i+q.length+110);
-return (start?"…":"")+text.slice(start,end)+(end<text.length?"…":"");
+const chars=Array.from(text);
+let folded="",offsets=[];
+chars.forEach((c,j)=>{for(const ch of normalize(c)){folded+=ch;offsets.push(j);}});
+const i=folded.indexOf(q);
+if(i<0)return text.slice(0,175)+(chars.length>175?"…":"");
+const start=Math.max(0,(offsets[i]??0)-75),end=Math.min(chars.length,(offsets[i+q.length-1]??0)+111);
+return (start?"…":"")+chars.slice(start,end).join("")+(end<chars.length?"…":"");
 }
 form.addEventListener("submit",async e=>{
 e.preventDefault();
@@ -41,13 +45,13 @@ const q=normalize(input.value);
 if(q.length<2){status.textContent="Enter at least two characters.";return;}
 status.textContent="Searching published pages…";results.replaceChildren();
 try{
-const docs=await load();const hits=docs.filter(d=>d.norm.includes(q));
-status.textContent=hits.length+" matching page"+(hits.length===1?"":"s")+" found across "+docs.length+" available pages.";
-hits.sort((a,b)=>(normalize(b.label).includes(q)?1:0)-(normalize(a.label).includes(q)?1:0));
+const docs=await load();const hits=docs.filter(d=>d.norm.includes(q)||d.titleNorm.includes(q));
+status.textContent=hits.length+" matching page"+(hits.length===1?"":"s")+" found across "+docs.length+" of "+resources.length+" indexed pages."+(docs.length<resources.length?" Some pages could not be loaded.":"");
+hits.sort((a,b)=>Number(b.titleNorm.includes(q))-Number(a.titleNorm.includes(q)));
 for(const hit of hits){
 const article=document.createElement("article");article.className="search-result";
 const heading=document.createElement("h2"),link=document.createElement("a");
-link.href=hit.url;link.textContent=hit.label;heading.append(link);
+link.href=hit.url;link.textContent=hit.title;heading.append(link);
 const desc=document.createElement("p");desc.textContent=snippet(hit.text,q);
 article.append(heading,desc);results.append(article);
 }
