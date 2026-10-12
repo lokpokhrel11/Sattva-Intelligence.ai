@@ -27,9 +27,9 @@ async function fallbackLoad(){
     const r=await fetch(url);
     if(!r.ok)continue;
     const page=new DOMParser().parseFromString(await r.text(),"text/html");
-    const title=(page.querySelector("title")?.textContent||url).replace(/\\s*[—|]\\s*Sattva Intelligence.*$/,"").trim();
+    const title=(page.querySelector("title")?.textContent||url).replace(/\s*[—|]\s*Sattva Intelligence.*$/,"").trim();
     for(const el of page.querySelectorAll("script,style,nav,footer,header.site-header"))el.remove();
-    const text=(page.querySelector("main")?.textContent||"").replace(/\\s+/g," ").trim();
+    const text=(page.querySelector("main")?.textContent||"").replace(/\s+/g," ").trim();
     docs[i]={url,title,text,norm:normalize(text),titleNorm:normalize(title)};
    }catch(e){}
   }
