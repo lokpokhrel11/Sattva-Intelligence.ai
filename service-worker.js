@@ -1,4 +1,4 @@
-const CACHE_NAME = "sattva-intelligence-v1";
+const CACHE_NAME = "sattva-intelligence-v2";
 
 const CORE_FILES = [
   "./",
@@ -34,15 +34,17 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-  if (event.request.method !== "GET") return;
+  if (event.request.method !== "GET" || new URL(event.request.url).origin !== self.location.origin) return;
 
   event.respondWith(
     fetch(event.request)
       .then(response => {
-        const copy = response.clone();
-
-        caches.open(CACHE_NAME)
-          .then(cache => cache.put(event.request, copy));
+        if (response.ok && response.type === "basic") {
+          const copy = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(event.request, copy))
+            .catch(() => {});
+        }
 
         return response;
       })
