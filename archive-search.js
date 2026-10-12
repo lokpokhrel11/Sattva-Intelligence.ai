@@ -56,7 +56,7 @@ function matches(text,q,limit=6){
   const i=folded.indexOf(q,from);if(i<0)break;
   const begin=offsets[i]??0,end=(offsets[i+q.length-1]??begin)+1;
   const left=Math.max(0,begin-85),right=Math.min(chars.length,end+105);
-  if(found.length<limit)found.push({occurrence:index,snippet:(left?"…":"")+chars.slice(left,right).join("")+(right<chars.length?"…":"")});
+  if(found.length<limit)found.push({occurrence:index,snippet:(left?"…":"")+chars.slice(left,right).join("")+(right<chars.length?"…":""),matchStart:begin-left+(left?1:0),matchLength:end-begin});
   index++;from=i+Math.max(1,q.length);
  }
  return found;
@@ -89,7 +89,17 @@ form.addEventListener("submit",async e=>{
      const p=document.createElement("p");
      const a=document.createElement("a");
      a.href=passageLink(hit.url,q,passage.occurrence);
-     a.textContent=passage.snippet;
+     // Only the matching word is yellow; surrounding excerpt remains normal text.
+     a.style.cssText="color:inherit;text-decoration:none;display:block;line-height:1.65";
+     const chars=Array.from(passage.snippet);
+     const begin=passage.matchStart,end=begin+passage.matchLength;
+     a.append(document.createTextNode(chars.slice(0,begin).join("")));
+     const mark=document.createElement("mark");
+     mark.textContent=chars.slice(begin,end).join("");
+     mark.style.cssText="background:#ffe27a;color:#171717;font-weight:700;padding:1px 2px;border-radius:2px";
+     a.append(mark,document.createTextNode(chars.slice(end).join("")));
+     a.addEventListener("mouseenter",()=>{a.style.textDecoration="underline";});
+     a.addEventListener("mouseleave",()=>{a.style.textDecoration="none";});
      a.setAttribute("aria-label","Open matching passage "+(i+1)+" in "+hit.title);
      p.append(a);list.append(p);
     });
