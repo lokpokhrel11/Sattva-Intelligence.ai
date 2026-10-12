@@ -9,6 +9,34 @@ let pending=null;
 function normalize(s){
  return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
 }
+async function fallbackLoad(){
+ const response=await fetch("sitemap.xml",{cache:"no-cache"});
+ if(!response.ok)throw Error("Sitemap unavailable");
+ const xml=new DOMParser().parseFromString(await response.text(),"application/xml");
+ if(xml.querySelector("parsererror"))throw Error("Invalid sitemap");
+ const base=new URL(".",location.href);
+ const urls=[...xml.getElementsByTagName("loc")].map(n=>n.textContent.trim()).map(v=>{try{return new URL(v)}catch(e){return null}})
+  .filter(u=>u&&u.origin===base.origin&&u.pathname.startsWith(base.pathname)&&u.pathname.endsWith(".html")&&!u.pathname.endsWith("/search.html"))
+  .map(u=>u.pathname.slice(base.pathname.length));
+ const unique=[...new Set(urls)],docs=new Array(unique.length);
+ let cursor=0;
+ async function worker(){
+  while(cursor<unique.length){
+   const i=cursor++,url=unique[i];
+   try{
+    const r=await fetch(url);
+    if(!r.ok)continue;
+    const page=new DOMParser().parseFromString(await r.text(),"text/html");
+    const title=(page.querySelector("title")?.textContent||url).replace(/\\s*[—|]\\s*Sattva Intelligence.*$/,"").trim();
+    for(const el of page.querySelectorAll("script,style,nav,footer,header.site-header"))el.remove();
+    const text=(page.querySelector("main")?.textContent||"").replace(/\\s+/g," ").trim();
+    docs[i]={url,title,text,norm:normalize(text),titleNorm:normalize(title)};
+   }catch(e){}
+  }
+ }
+ await Promise.all(Array.from({length:Math.min(6,unique.length)},()=>worker()));
+ return docs.filter(Boolean);
+}
 function load(){
  if(!pending)pending=fetch("search-index.json",{cache:"no-cache"}).then(r=>{
   if(!r.ok)throw Error("Search index unavailable");
@@ -16,7 +44,7 @@ function load(){
  }).then(data=>{
   if(data.version!==1||!Array.isArray(data.documents))throw Error("Invalid search index");
   return data.documents.map(d=>({...d,norm:normalize(d.text),titleNorm:normalize(d.title)}));
- }).catch(e=>{pending=null;throw e;});
+ }).catch(async e=>{try{return await fallbackLoad();}catch(err){pending=null;throw err;}});
  return pending;
 }
 function snippet(text,q){
