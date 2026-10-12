@@ -47,15 +47,25 @@ function load(){
  }).catch(async e=>{try{return await fallbackLoad();}catch(err){pending=null;throw err;}});
  return pending;
 }
-function snippet(text,q){
+function matches(text,q,limit=6){
  const chars=Array.from(text||"");
  let folded="",offsets=[];
- chars.forEach((c,j)=>{for(const ch of normalize(c)){folded+=ch;offsets.push(j);}});
- const i=folded.indexOf(q);
- if(i<0)return chars.slice(0,175).join("")+(chars.length>175?"…":"");
- const start=Math.max(0,(offsets[i]??0)-75);
- const end=Math.min(chars.length,(offsets[i+q.length-1]??0)+111);
- return (start?"…":"")+chars.slice(start,end).join("")+(end<chars.length?"…":"");
+ chars.forEach((c,j)=>{const v=normalize(c);for(const ch of v){folded+=ch;offsets.push(j);}});
+ const found=[];let from=0,index=0;
+ while(from<folded.length){
+  const i=folded.indexOf(q,from);if(i<0)break;
+  const begin=offsets[i]??0,end=(offsets[i+q.length-1]??begin)+1;
+  const left=Math.max(0,begin-85),right=Math.min(chars.length,end+105);
+  if(found.length<limit)found.push({occurrence:index,snippet:(left?"…":"")+chars.slice(left,right).join("")+(right<chars.length?"…":"")});
+  index++;from=i+Math.max(1,q.length);
+ }
+ return found;
+}
+function passageLink(url,q,occurrence){
+ const target=new URL(url,location.href);
+ target.searchParams.set("archive_find",q);
+ target.searchParams.set("archive_occurrence",String(occurrence));
+ return target.href;
 }
 form.addEventListener("submit",async e=>{
  e.preventDefault();
@@ -69,10 +79,25 @@ form.addEventListener("submit",async e=>{
   status.textContent=hits.length+" matching page"+(hits.length===1?"":"s")+" found across "+docs.length+" indexed pages.";
   for(const hit of hits){
    const article=document.createElement("article");article.className="search-result";
+   const passages=matches(hit.text,q);
    const heading=document.createElement("h2"),link=document.createElement("a");
-   link.href=hit.url;link.textContent=hit.title;heading.append(link);
-   const desc=document.createElement("p");desc.textContent=snippet(hit.text,q);
-   article.append(heading,desc);results.append(article);
+   link.href=passages.length?passageLink(hit.url,q,passages[0].occurrence):hit.url;
+   link.textContent=hit.title;heading.append(link);article.append(heading);
+   if(passages.length){
+    const list=document.createElement("div");list.className="search-passages";
+    passages.forEach((passage,i)=>{
+     const p=document.createElement("p");
+     const a=document.createElement("a");
+     a.href=passageLink(hit.url,q,passage.occurrence);
+     a.textContent=passage.snippet;
+     a.setAttribute("aria-label","Open matching passage "+(i+1)+" in "+hit.title);
+     p.append(a);list.append(p);
+    });
+    article.append(list);
+   }else{
+    const desc=document.createElement("p");desc.textContent="Term found in page title. Open page.";article.append(desc);
+   }
+   results.append(article);
   }
   if(!hits.length){const p=document.createElement("p");p.textContent="No matching published page found. Try another spelling or browse the indexes.";results.append(p);}
  }catch(err){
