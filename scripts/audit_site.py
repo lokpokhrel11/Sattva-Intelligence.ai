@@ -47,7 +47,7 @@ def audit():
                 errors.append(f"{name}: site-root URL outside project: {ref}")
                 continue
             if not path:
-                target = ROOT / (name if not u.path and u.fragment else "index.html")
+                target = ROOT / (name if not u.path and (u.fragment or u.query) else "index.html")
             else:
                 target = (ROOT / path)
                 if path.endswith("/"):
