@@ -15,10 +15,21 @@
 >
 
 <link rel="stylesheet" href="styles.css">
+<style>
+/* Grammar tables: use the available page width without clipping the last column. */
+.sanskrit-grammar-page .section .prose { max-width: 100%; }
+.sanskrit-grammar-page .section .prose > p,
+.sanskrit-grammar-page .section .prose > ul,
+.sanskrit-grammar-page .section .prose > ol { max-width: var(--reading); }
+.sanskrit-grammar-page .table-wrap { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.sanskrit-grammar-page .table-wrap table { width: 100%; min-width: 680px; table-layout: auto; }
+.sanskrit-grammar-page .table-wrap th,
+.sanskrit-grammar-page .table-wrap td { overflow-wrap: anywhere; word-break: normal; }
+</style>
 <script src="site.js" defer></script>
 </head>
 
-<body>
+<body class="sanskrit-grammar-page">
 
 <a class="skip-link" href="#main">Skip to content</a>
 
