@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lokpokhrel11.github.io/Sattva-Intelligence.ai/sitemap.xml
