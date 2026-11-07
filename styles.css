@@ -1068,3 +1068,21 @@ tbody tr:hover td{
 .page-head-teaching .container,.page-head-about .container{position:relative;z-index:1}
 .page-head-teaching h1,.page-head-about h1,.page-head-teaching p,.page-head-about p{text-shadow:0 2px 12px rgba(0,0,0,.65)}
 @media(max-width:760px){.page-head-teaching::before{background:linear-gradient(90deg,rgba(17,17,15,.97),rgba(17,17,15,.68)),url("https://commons.wikimedia.org/wiki/Special:FilePath/Nalanda_Ruins.jpg") center/cover no-repeat}.page-head-about::before{background:linear-gradient(90deg,rgba(17,17,15,.97),rgba(17,17,15,.74)),url("images/images/Lok Pokhrel.jpeg") right center/auto 100% no-repeat}}
+
+/* Subtle but legible source credits immediately below image headers. */
+.page-head-research + .container .method-image-credit,
+.page-head-teaching + .container .method-image-credit,
+.page-head-about + .container .method-image-credit {
+  font-size: .72rem;
+  line-height: 1.45;
+  color: #a9a59b;
+  margin: 7px 0 0;
+  max-width: 100%;
+}
+.page-head-research + .container .method-image-credit a,
+.page-head-teaching + .container .method-image-credit a,
+.page-head-about + .container .method-image-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
