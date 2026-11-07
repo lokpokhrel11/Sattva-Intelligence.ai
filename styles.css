@@ -1026,3 +1026,35 @@ tbody tr:hover td{
   background: rgba(0, 0, 0, 0.75);
   border-color: #ffffff;
 }
+
+
+/* Research & Publications: manuscript hero aligned with other section headers. */
+.page-head-research {
+  position: relative;
+  overflow: hidden;
+}
+.page-head-research::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(17,17,15,.99) 0%, rgba(17,17,15,.96) 28%, rgba(17,17,15,.76) 52%, rgba(17,17,15,.32) 80%, rgba(17,17,15,.12) 100%),
+    url("images/images/method-bhagavata-manuscript.jpg") center 40% / cover no-repeat;
+  pointer-events: none;
+}
+.page-head-research .container {
+  position: relative;
+  z-index: 1;
+}
+.page-head-research h1,
+.page-head-research .eyebrow,
+.page-head-research p {
+  text-shadow: 0 2px 12px rgba(0,0,0,.65);
+}
+@media (max-width: 760px) {
+  .page-head-research::before {
+    background:
+      linear-gradient(90deg, rgba(17,17,15,.97) 0%, rgba(17,17,15,.88) 55%, rgba(17,17,15,.58) 100%),
+      url("images/images/method-bhagavata-manuscript.jpg") center / cover no-repeat;
+  }
+}
