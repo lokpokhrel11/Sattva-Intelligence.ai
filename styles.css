@@ -1099,3 +1099,6 @@ tbody tr:hover td{
 /* Indic Minds: match the compact image attribution immediately beneath other page heroes. */
 .page-head-nyaya + .container .method-image-credit{font-size:.72rem;line-height:1.45;color:#a9a59b;margin:7px 0 0;max-width:100%}
 .page-head-nyaya + .container .method-image-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
+/* Home hero image credit, aligned with other page header attributions. */
+.hero + .container .home-image-credit{font-size:.72rem;line-height:1.45;color:#a9a59b;margin:7px 0 0;max-width:100%}
