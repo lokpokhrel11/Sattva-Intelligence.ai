@@ -71,7 +71,7 @@ try {
   const sitemapResponse = await page.request.get(base + 'sitemap.xml');
   check('Sitemap responds', sitemapResponse.ok(), String(sitemapResponse.status()));
   const sitemapXml = await sitemapResponse.text();
-  const sitemapUrls = [...sitemapXml.matchAll(/<loc>([^<]+)<\\/loc>/g)].map(match => match[1]);
+  const sitemapUrls = [...sitemapXml.matchAll(new RegExp('<loc>([^<]+)</loc>', 'g'))].map(match => match[1]);
   check('Sitemap lists 29 pages', sitemapUrls.length === 29, String(sitemapUrls.length));
   const origin = 'https://lokpokhrel11.github.io/Sattva-Intelligence.ai/';
   for (const url of sitemapUrls) {
