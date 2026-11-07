@@ -1063,11 +1063,11 @@ tbody tr:hover td{
 /* Distinct, source-attributed section hero photographs. */
 .page-head-teaching,.page-head-about{position:relative;overflow:hidden}
 .page-head-teaching::before,.page-head-about::before{content:"";position:absolute;inset:0;pointer-events:none}
-.page-head-teaching::before{background:linear-gradient(90deg,rgba(17,17,15,.99) 0%,rgba(17,17,15,.94) 28%,rgba(17,17,15,.65) 60%,rgba(17,17,15,.20) 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Nalanda_Ruins.jpg") center 45%/cover no-repeat}
+.page-head-teaching::before{background:linear-gradient(90deg,rgba(17,17,15,.99) 0%,rgba(17,17,15,.94) 28%,rgba(17,17,15,.65) 60%,rgba(17,17,15,.20) 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Excavated_ruins_of_the_monasteries_of_Nalanda_01.jpg") center 45%/cover no-repeat}
 .page-head-about::before{background:linear-gradient(90deg,rgba(17,17,15,1) 0%,rgba(17,17,15,.96) 32%,rgba(17,17,15,.70) 62%,rgba(17,17,15,.35) 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/P%C4%81rame%C5%9Bvaratantra%20%28Camb.%20Univ.%20Lib.%20MS%20Add.1049.1%29.jpg") right 28%/auto 170% no-repeat}
 .page-head-teaching .container,.page-head-about .container{position:relative;z-index:1}
 .page-head-teaching h1,.page-head-about h1,.page-head-teaching p,.page-head-about p{text-shadow:0 2px 12px rgba(0,0,0,.65)}
-@media(max-width:760px){.page-head-teaching::before{background:linear-gradient(90deg,rgba(17,17,15,.97),rgba(17,17,15,.68)),url("https://commons.wikimedia.org/wiki/Special:FilePath/Nalanda_Ruins.jpg") center/cover no-repeat}.page-head-about::before{background:linear-gradient(90deg,rgba(17,17,15,.97),rgba(17,17,15,.74)),url("https://commons.wikimedia.org/wiki/Special:FilePath/P%C4%81rame%C5%9Bvaratantra%20%28Camb.%20Univ.%20Lib.%20MS%20Add.1049.1%29.jpg") right center/auto 100% no-repeat}}
+@media(max-width:760px){.page-head-teaching::before{background:linear-gradient(90deg,rgba(17,17,15,.97),rgba(17,17,15,.68)),url("https://commons.wikimedia.org/wiki/Special:FilePath/Excavated_ruins_of_the_monasteries_of_Nalanda_01.jpg") center/cover no-repeat}.page-head-about::before{background:linear-gradient(90deg,rgba(17,17,15,.97),rgba(17,17,15,.74)),url("https://commons.wikimedia.org/wiki/Special:FilePath/P%C4%81rame%C5%9Bvaratantra%20%28Camb.%20Univ.%20Lib.%20MS%20Add.1049.1%29.jpg") right center/auto 100% no-repeat}}
 
 /* Subtle but legible source credits immediately below image headers. */
 .page-head-research + .container .method-image-credit,
