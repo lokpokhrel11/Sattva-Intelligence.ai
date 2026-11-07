@@ -32,7 +32,7 @@ try {
       check(`Escape closes menu at ${width}px`, await menu.getAttribute('aria-expanded') === 'false');
       check(`Escape restores focus at ${width}px`, await menu.evaluate(el => document.activeElement === el));
       await menu.click();
-      await page.locator('main').click({ position: { x: 10, y: 10 }, force: true });
+      await page.evaluate(() => document.querySelector('footer')?.dispatchEvent(new MouseEvent('click', { bubbles: true })));
       check(`Outside click closes menu at ${width}px`, await menu.getAttribute('aria-expanded') === 'false');
     }
     if (width === 375) {
@@ -60,7 +60,7 @@ try {
   if (await searchInput.count()) {
     await searchInput.fill('Vidura');
     await page.locator('button[type="submit"]').first().click();
-    check('Archive search returns matches', (await page.locator('body').innerText()).includes('matching pages found'));
+    await page.waitForFunction(() => /[1-9]\\d* matching pages found/.test(document.body.innerText), { timeout: 10000 }).catch(() => {});\n    check('Archive search returns matches', /[1-9]\\d* matching pages found/.test(await page.locator('body').innerText()));
   } else {
     check('Archive search input found', false);
   }
