@@ -902,7 +902,7 @@ tbody tr:hover td{
   height: 100%;
   background:
     linear-gradient(90deg, rgba(17,17,15,.97) 0%, rgba(17,17,15,.85) 22%, rgba(17,17,15,.35) 48%, rgba(17,17,15,.1) 70%, rgba(17,17,15,0) 100%),
-    url("images/images/suka-parikshit.png") center right / cover no-repeat;
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Page_of_Text%2C_Folio_from_a_Bhagavata_Purana_%28Ancient_Stories_of_the_Lord%29_LACMA_M.82.62.1_%282_of_2%29.jpg") center 45% / cover no-repeat;
   opacity: 1;
   pointer-events: none;
 }
@@ -1102,3 +1102,7 @@ tbody tr:hover td{
 
 /* Home hero image credit, aligned with other page header attributions. */
 .hero + .container .home-image-credit{font-size:.72rem;line-height:1.45;color:#a9a59b;margin:7px 0 0;max-width:100%}
+
+/* Episode Index: historical Bhagavata manuscript folio and compact archival attribution. */
+.page-head-suka + .container .method-image-credit{font-size:.72rem;line-height:1.45;color:#a9a59b;margin:7px 0 0;max-width:100%}
+.page-head-suka + .container .method-image-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
