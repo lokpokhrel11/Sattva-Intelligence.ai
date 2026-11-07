@@ -60,8 +60,10 @@ try {
   if (await searchInput.count()) {
     await searchInput.fill('Vidura');
     await page.locator('button[type="submit"]').first().click();
-    await page.waitForFunction(() => /[1-9]\\d* matching pages found/.test(document.body.innerText), { timeout: 10000 }).catch(() => {});
-    check('Archive search returns matches', /[1-9]\\d* matching pages found/.test(await page.locator('body').innerText()));
+    await page.waitForFunction(() => /matching pages? found across/.test(document.querySelector('#search-status')?.textContent || ''), { timeout: 10000 }).catch(() => {});
+    const statusText = await page.locator('#search-status').innerText();
+    const resultCount = await page.locator('.search-result').count();
+    check('Archive search returns matches', resultCount > 0, `results=${resultCount}; status=${statusText}`);
   } else {
     check('Archive search input found', false);
   }
