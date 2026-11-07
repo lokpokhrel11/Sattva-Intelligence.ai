@@ -181,7 +181,7 @@ main{
       rgba(17,17,15,.28) 48%,
       rgba(17,17,15,.08) 100%
     ),
-    url("https://commons.wikimedia.org/wiki/Special:FilePath/Bhagavata_Purana_manuscript%2C_18_century.jpg") center right / cover no-repeat;
+    url("https://upload.wikimedia.org/wikipedia/commons/f/fc/Bhagavata_Purana_manuscript%2C_18_century.jpg") center right / cover no-repeat;
   opacity:.62;
   filter:grayscale(20%) sepia(10%);
   pointer-events:none;
