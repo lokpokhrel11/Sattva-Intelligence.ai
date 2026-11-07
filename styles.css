@@ -1086,3 +1086,12 @@ tbody tr:hover td{
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* Corrections Log: annotated historical Sanskrit manuscript. */
+.page-head-corrections{position:relative;overflow:hidden}
+.page-head-corrections::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(17,17,15,.99) 0%,rgba(17,17,15,.94) 28%,rgba(17,17,15,.69) 58%,rgba(17,17,15,.20) 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/17th-century_manuscript_copy_of_Kalidasa%27s_Raghuvamsa%2C_Kavya%2C_Sanskrit%2C_Nepali_script.jpg") center 42%/cover no-repeat}
+.page-head-corrections .container{position:relative;z-index:1}
+.page-head-corrections h1,.page-head-corrections p{text-shadow:0 2px 12px rgba(0,0,0,.65)}
+.page-head-corrections + .container .method-image-credit{font-size:.72rem;line-height:1.45;color:#a9a59b;margin:7px 0 0;max-width:100%}
+.page-head-corrections + .container .method-image-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:760px){.page-head-corrections::before{background:linear-gradient(90deg,rgba(17,17,15,.97),rgba(17,17,15,.72)),url("https://commons.wikimedia.org/wiki/Special:FilePath/17th-century_manuscript_copy_of_Kalidasa%27s_Raghuvamsa%2C_Kavya%2C_Sanskrit%2C_Nepali_script.jpg") center/cover no-repeat}}
