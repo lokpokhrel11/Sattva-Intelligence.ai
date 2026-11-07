@@ -10,12 +10,20 @@ on:
       - 'service-worker.js'
       - '.github/workflows/website-preview-qa.yml'
       - 'tests/website-qa.mjs'
+      - 'sitemap.xml'
+      - 'scripts/audit_site.py'
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
+  link-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit internal links, anchors, and sitemap
+        run: python3 scripts/audit_site.py
   browser-qa:
     runs-on: ubuntu-latest
     timeout-minutes: 15
