@@ -67,6 +67,31 @@ try {
   } else {
     check('Archive search input found', false);
   }
+  // Scholarly discovery and publication metadata checks.
+  const sitemapResponse = await page.request.get(base + 'sitemap.xml');
+  check('Sitemap responds', sitemapResponse.ok(), String(sitemapResponse.status()));
+  const sitemapXml = await sitemapResponse.text();
+  const sitemapUrls = [...sitemapXml.matchAll(/<loc>([^<]+)<\\/loc>/g)].map(match => match[1]);
+  check('Sitemap lists 29 pages', sitemapUrls.length === 29, String(sitemapUrls.length));
+  const origin = 'https://lokpokhrel11.github.io/Sattva-Intelligence.ai/';
+  for (const url of sitemapUrls) {
+    const path = url === origin ? 'index.html' : url.startsWith(origin) ? url.slice(origin.length) : null;
+    if (!path) { check('Sitemap URL belongs to website', false, url); continue; }
+    const response = await page.goto(base + path, { waitUntil: 'domcontentloaded' });
+    const canonical = await page.locator('link[rel="canonical"]').first().getAttribute('href').catch(() => null);
+    check('Sitemap page and canonical: ' + path, Boolean(response?.ok()) && canonical === url, String(response?.status()) + '; ' + canonical);
+  }
+  const robots = await page.request.get(base + 'robots.txt');
+  check('Robots file advertises sitemap', robots.ok() && (await robots.text()).includes(origin + 'sitemap.xml'));
+  const manifestResponse = await page.request.get(base + 'manifest.webmanifest');
+  const manifestData = await manifestResponse.json();
+  for (const entry of manifestData.icons || []) {
+    const asset = await page.request.get(base + entry.src);
+    check('PWA icon exists: ' + entry.src, asset.ok(), String(asset.status()));
+  }
+  await page.goto(base, { waitUntil: 'domcontentloaded' });
+  const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
+  check('Homepage has valid WebSite structured data', jsonLd.some(raw => { try { const data = JSON.parse(raw); return data['@type'] === 'WebSite' && data.url === origin; } catch { return false; } }));
   await page.close();
 } finally {
   await browser.close();
