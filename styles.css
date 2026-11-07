@@ -1039,7 +1039,7 @@ tbody tr:hover td{
   inset: 0;
   background:
     linear-gradient(90deg, rgba(17,17,15,.99) 0%, rgba(17,17,15,.96) 28%, rgba(17,17,15,.76) 52%, rgba(17,17,15,.32) 80%, rgba(17,17,15,.12) 100%),
-    url("images/images/method-bhagavata-manuscript.jpg") center 40% / cover no-repeat;
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Aitareya_Upanishad%2C_Sanskrit%2C_Rigveda%2C_Devanagari_script%2C_1865_CE_manuscript.jpg") center 40% / cover no-repeat;
   pointer-events: none;
 }
 .page-head-research .container {
@@ -1055,6 +1055,6 @@ tbody tr:hover td{
   .page-head-research::before {
     background:
       linear-gradient(90deg, rgba(17,17,15,.97) 0%, rgba(17,17,15,.88) 55%, rgba(17,17,15,.58) 100%),
-      url("images/images/method-bhagavata-manuscript.jpg") center / cover no-repeat;
+      url("https://commons.wikimedia.org/wiki/Special:FilePath/Aitareya_Upanishad%2C_Sanskrit%2C_Rigveda%2C_Devanagari_script%2C_1865_CE_manuscript.jpg") center / cover no-repeat;
   }
 }
