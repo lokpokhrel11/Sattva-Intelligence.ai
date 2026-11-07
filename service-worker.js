@@ -1,4 +1,4 @@
-const CACHE_NAME = "sattva-intelligence-v2";
+const CACHE_NAME = "sattva-intelligence-v3-home-manuscript";
 
 const CORE_FILES = [
   "./",
