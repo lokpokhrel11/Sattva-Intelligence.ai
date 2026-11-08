@@ -1108,3 +1108,6 @@ tbody tr:hover td{
 .page-head-suka + .container .method-image-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 
 @media(max-width:760px){.page-head-suka::before{background-image:linear-gradient(90deg,rgba(12,12,12,.98) 0%,rgba(12,12,12,.91) 60%,rgba(12,12,12,.66) 100%),url("https://images.metmuseum.org/CRDImages/as/original/DP156159.jpg")}}
+
+/* Temporarily withhold incomplete Research & Publications page from site navigation. */
+.site-nav a[href="research.html"]{display:none!important}
